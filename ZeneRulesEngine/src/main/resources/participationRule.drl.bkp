@@ -1,0 +1,28 @@
+package demo
+import com.zenefits.benefits.poc.ZeneRulesEngine.models.CarrierMetadata
+import com.zenefits.benefits.poc.ZeneRulesEngine.models.ParticipationRuleResponse
+
+rule "aetnaCalifornia"
+  when
+  $carrierMetadata : CarrierMetadata( name == "Aetna", state == "CA" )
+  participationRuleResponse: ParticipationRuleResponse()
+  
+  then
+  $carrierMetadata.setGroupSize("50");
+  participationRuleResponse.setMinimumNumberOfEEs("5000");
+  System.out.println("This is Aetna CA !!"+participationRuleResponse.getMinimumNumberOfEEs());
+end
+
+rule "kaiserCalifornia"
+  when
+  $carrierMetadata : CarrierMetadata( name == "Aetna", state == "NV" )
+  then
+  System.out.println("This is Aetna NV !!");
+end
+
+rule "aetnaNevada"
+  when
+  $carrierMetadata : CarrierMetadata( name == "Kaiser", state == "CA" )
+  then
+  System.out.println("This is Kaiser CA !!");
+end

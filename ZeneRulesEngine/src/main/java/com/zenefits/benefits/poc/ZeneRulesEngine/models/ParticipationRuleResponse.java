@@ -9,21 +9,23 @@ package com.zenefits.benefits.poc.ZeneRulesEngine.models;
  */
 public class ParticipationRuleResponse {
 	
-	private Integer minimumNumberOfEEs;
-	private Double minimumPercentageOfEEs;
+	private Boolean participationRuleSatisfied;
+	private String failureReason;
 	
-	public Integer getMinimumNumberOfEEs() {
-		return minimumNumberOfEEs;
+	public Boolean getParticipationRuleSatisfied() {
+		return participationRuleSatisfied;
 	}
-	public void setMinimumNumberOfEEs(Integer minimumNumberOfEEs) {
-		this.minimumNumberOfEEs = minimumNumberOfEEs;
+	public void setParticipationRuleSatisfied(Boolean participationRuleSatisfied) {
+		this.participationRuleSatisfied = participationRuleSatisfied;
 	}
-	public Double getMinimumPercentageOfEEs() {
-		return minimumPercentageOfEEs;
+	public String getFailureReason() {
+		return failureReason;
 	}
-	public void setMinimumPercentageOfEEs(Double minimumPercentageOfEEs) {
-		this.minimumPercentageOfEEs = minimumPercentageOfEEs;
+	public void setFailureReason(String failureReason) {
+		this.failureReason = failureReason;
 	}
+	
+	
 	
 	
 

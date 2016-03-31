@@ -9,41 +9,31 @@ import org.kie.internal.builder.KnowledgeBuilder;
 import org.kie.internal.builder.KnowledgeBuilderFactory;
 import org.kie.internal.io.ResourceFactory;
 import org.kie.internal.runtime.StatelessKnowledgeSession;
+import org.springframework.context.ApplicationListener;
+import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.stereotype.Component;
 
 import com.zenefits.benefits.poc.ZeneRulesEngine.models.ParticipationRuleFact;
 
-public class ParticipationDecisionTable {
-	private static StatelessKnowledgeSession session;
+@Component
+public class ParticipationDecisionTable implements ApplicationListener<ContextRefreshedEvent> {
+	public static StatelessKnowledgeSession KSESSION;
+	
+//	public static void main(String[] args) throws Exception {
+//		KnowledgeBase knowledgeBase = createKnowledgeBaseFromSpreadsheet();
+//		KSESSION = knowledgeBase.newStatelessKnowledgeSession();
+//		ParticipationRuleFact participationRuleFact = new ParticipationRuleFact("Anthem", "CA", "medical", "voluntary", "", 23, 12);
+//		KSESSION.execute(participationRuleFact);
+//
+//		System.out.println("Participation Rule- No. of EEs: " + participationRuleFact.getMinimumNumberOfEEs()+" Percent: "+participationRuleFact.getMinimumPercentageOfEEs());
+//		ParticipationRuleFact participationRuleFactTwo = new ParticipationRuleFact("Anthem", "NV", "medical", "voluntary", "", 65, 9);
+//		KSESSION.execute(participationRuleFactTwo);
+//
+//		System.out.println("Participation Rule- No. of EEs: " + participationRuleFactTwo.getMinimumNumberOfEEs()+" Percent: "+participationRuleFactTwo.getMinimumPercentageOfEEs());
+//	}
 
-	public static void main(String[] args) throws Exception {
-		KnowledgeBase knowledgeBase = createKnowledgeBaseFromSpreadsheet();
-		session = knowledgeBase.newStatelessKnowledgeSession();
-		ParticipationRuleFact participationRuleFact = new ParticipationRuleFact("Anthem",
-																	"CA",
-																	"medical",
-																	"voluntary",
-																	"",
-																	23,
-																	12);
-		session.execute(participationRuleFact);
-
-		System.out.println("Participation Rule Satisfied? \n" + participationRuleFact.isParticipationRuleSatisfied());
-		ParticipationRuleFact participationRuleFactTwo = new ParticipationRuleFact("Anthem",
-				"CA",
-				"medical",
-				"voluntary",
-				"",
-				23,
-				9);
-		session.execute(participationRuleFactTwo);
-
-		System.out.println("Participation Rule Satisfied? \n" + participationRuleFactTwo.isParticipationRuleSatisfied());
-	}
-
-	private static KnowledgeBase createKnowledgeBaseFromSpreadsheet()
-			throws Exception {
-		DecisionTableConfiguration dtconf = KnowledgeBuilderFactory
-				.newDecisionTableConfiguration();
+	private static KnowledgeBase createKnowledgeBaseFromSpreadsheet() throws Exception {
+		DecisionTableConfiguration dtconf = KnowledgeBuilderFactory.newDecisionTableConfiguration();
 		dtconf.setInputType(DecisionTableInputType.XLS);
 
 		KnowledgeBuilder knowledgeBuilder = KnowledgeBuilderFactory.newKnowledgeBuilder();
@@ -56,5 +46,16 @@ public class ParticipationDecisionTable {
 		KnowledgeBase knowledgeBase = KnowledgeBaseFactory.newKnowledgeBase();
 		knowledgeBase.addKnowledgePackages(knowledgeBuilder.getKnowledgePackages());
 		return knowledgeBase;
+	}
+
+	public void onApplicationEvent(ContextRefreshedEvent arg0) {
+		KnowledgeBase knowledgeBase;
+		try {
+			System.out.println("===== Loading Rules ==== ");
+			knowledgeBase = createKnowledgeBaseFromSpreadsheet();
+			KSESSION = knowledgeBase.newStatelessKnowledgeSession();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

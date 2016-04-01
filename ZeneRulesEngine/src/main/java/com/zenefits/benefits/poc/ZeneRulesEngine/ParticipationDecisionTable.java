@@ -37,7 +37,9 @@ public class ParticipationDecisionTable implements ApplicationListener<ContextRe
 		dtconf.setInputType(DecisionTableInputType.XLS);
 
 		KnowledgeBuilder knowledgeBuilder = KnowledgeBuilderFactory.newKnowledgeBuilder();
+		knowledgeBuilder.add(ResourceFactory.newClassPathResource("rules/participation_exception_rules.xls"), ResourceType.DTABLE, dtconf);
 		knowledgeBuilder.add(ResourceFactory.newClassPathResource("rules/participation_rules.xls"), ResourceType.DTABLE, dtconf);
+		
 
 		if (knowledgeBuilder.hasErrors()) {
 			throw new RuntimeException(knowledgeBuilder.getErrors().toString());

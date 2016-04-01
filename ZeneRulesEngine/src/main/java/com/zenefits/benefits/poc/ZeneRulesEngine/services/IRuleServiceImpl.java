@@ -22,7 +22,6 @@ public class IRuleServiceImpl implements IRulesService{
 		Double minPercentOfEEs = participationRuleFact.getMinimumPercentageOfEEs();
 		boolean rulesAvailable = false;
 		boolean rulesPassed = false;
-		String failureReason = null;
 		
 		if (minNumberOfEEs != null) {
 			rulesAvailable = true;
@@ -30,7 +29,7 @@ public class IRuleServiceImpl implements IRulesService{
 				rulesPassed = true;
 			}else{
 				rulesPassed = false;
-				failureReason = "Minimum number of enrolled EEs requried: "+minNumberOfEEs+" Actual number of EEs enrolled: "+participationRuleFact.getNumberOfEnrolled();
+				participationRuleResponse.addFailureReason("Minimum number of enrolled EEs requried: "+minNumberOfEEs+" Actual number of EEs enrolled: "+participationRuleFact.getNumberOfEnrolled());
 			}
 		}
 		
@@ -41,18 +40,15 @@ public class IRuleServiceImpl implements IRulesService{
 				rulesPassed = true;
 			}else{
 				rulesPassed = false;
-				failureReason = "Minimum percent of enrolled EEs requried: "+(minPercentOfEEs*100)+"% Actual percent of EEs enrolled: "+(eeEnrolled*100)+"%";
+				participationRuleResponse.addFailureReason("Minimum percent of enrolled EEs requried: "+(minPercentOfEEs*100)+"% Actual percent of EEs enrolled: "+(eeEnrolled*100)+"%");
 			}
 		}
 		
 		if(rulesAvailable){
 			participationRuleResponse.setParticipationRuleSatisfied(rulesPassed);
-			if (!rulesPassed){
-				participationRuleResponse.setFailureReason(failureReason);
-			}
 		}else{
 			participationRuleResponse.setParticipationRuleSatisfied(false);
-			participationRuleResponse.setFailureReason("No participation rule found for the input !!");
+			participationRuleResponse.addFailureReason("No participation rule found for the input !!");
 		}
 		
 		return participationRuleResponse;

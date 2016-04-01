@@ -3,6 +3,8 @@
  */
 package com.zenefits.benefits.poc.ZeneRulesEngine.models;
 
+import java.util.ArrayList;
+
 /**
  * @author ssingh
  *
@@ -10,7 +12,7 @@ package com.zenefits.benefits.poc.ZeneRulesEngine.models;
 public class ParticipationRuleResponse {
 	
 	private Boolean participationRuleSatisfied;
-	private String failureReason;
+	private ArrayList<String> failureReasons = new ArrayList<String>();
 	
 	public Boolean getParticipationRuleSatisfied() {
 		return participationRuleSatisfied;
@@ -18,13 +20,16 @@ public class ParticipationRuleResponse {
 	public void setParticipationRuleSatisfied(Boolean participationRuleSatisfied) {
 		this.participationRuleSatisfied = participationRuleSatisfied;
 	}
-	public String getFailureReason() {
-		return failureReason;
+	public ArrayList<String> getFailureReasons() {
+		return failureReasons;
 	}
-	public void setFailureReason(String failureReason) {
-		this.failureReason = failureReason;
+	public void setFailureReasons(ArrayList<String> failureReasons) {
+		this.failureReasons = failureReasons;
 	}
 	
+	public void addFailureReason(String failureReason){
+		this.failureReasons.add(failureReason);
+	}
 	
 	
 	

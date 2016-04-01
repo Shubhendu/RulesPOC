@@ -24,12 +24,17 @@ public class RulesController {
 	@Autowired
 	private IRulesService ruleService;
 	
-	@RequestMapping(value = "/api",method=RequestMethod.POST)
+	@RequestMapping(value = "/participation-rules",method=RequestMethod.POST)
 	@ResponseBody
 	public ParticipationRuleResponse getMainPage(@RequestBody ParticipationRuleFact participationRuleFact){
 		System.out.println("API is up and running !!");
 		return ruleService.executeParticipationRule(participationRuleFact);
 	}
 
+	@RequestMapping(value = "/health-check",method=RequestMethod.GET)
+	@ResponseBody
+	public String healthStatus(){
+		return "Hello world !!";
+	}
 	
 }

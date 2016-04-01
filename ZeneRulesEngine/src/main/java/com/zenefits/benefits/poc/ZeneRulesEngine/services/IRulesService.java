@@ -3,6 +3,7 @@
  */
 package com.zenefits.benefits.poc.ZeneRulesEngine.services;
 
+import com.zenefits.benefits.poc.ZeneRulesEngine.models.CarrierQuestionFact;
 import com.zenefits.benefits.poc.ZeneRulesEngine.models.ParticipationRuleFact;
 import com.zenefits.benefits.poc.ZeneRulesEngine.models.ParticipationRuleResponse;
 
@@ -12,5 +13,6 @@ import com.zenefits.benefits.poc.ZeneRulesEngine.models.ParticipationRuleRespons
  */
 public interface IRulesService {
 	public ParticipationRuleResponse executeParticipationRule(ParticipationRuleFact participationRuleFact);
+	public String executeCarrierQuestion(CarrierQuestionFact carrierQuestionFact);
 
 }

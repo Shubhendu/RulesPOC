@@ -4,7 +4,9 @@ import org.kie.internal.runtime.StatelessKnowledgeSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.zenefits.benefits.poc.ZeneRulesEngine.CarrierQuestionDecisionTable;
 import com.zenefits.benefits.poc.ZeneRulesEngine.ParticipationDecisionTable;
+import com.zenefits.benefits.poc.ZeneRulesEngine.models.CarrierQuestionFact;
 import com.zenefits.benefits.poc.ZeneRulesEngine.models.ParticipationRuleFact;
 import com.zenefits.benefits.poc.ZeneRulesEngine.models.ParticipationRuleResponse;
 
@@ -13,6 +15,7 @@ public class IRuleServiceImpl implements IRulesService{
 
 	@Autowired
 	private ParticipationDecisionTable participationDecisionsTable;
+	private CarrierQuestionDecisionTable carrierQuestionDecisionTable;
 	
 	public ParticipationRuleResponse executeParticipationRule(ParticipationRuleFact participationRuleFact) {
 		StatelessKnowledgeSession kSession = participationDecisionsTable.KSESSION;
@@ -54,6 +57,13 @@ public class IRuleServiceImpl implements IRulesService{
 		return participationRuleResponse;
 		
 		
+	}
+	
+	public String executeCarrierQuestion(CarrierQuestionFact carrierQuestionFact) {
+		StatelessKnowledgeSession kSession = participationDecisionsTable.KSESSION;
+		kSession.execute(carrierQuestionFact);
+		String questionsList = carrierQuestionFact.getQuestionsList();
+		return questionsList;
 	}
 
 }

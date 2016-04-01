@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.zenefits.benefits.poc.ZeneRulesEngine.models.ParticipationRuleFact;
+import com.zenefits.benefits.poc.ZeneRulesEngine.models.CarrierQuestionFact;
+
 import com.zenefits.benefits.poc.ZeneRulesEngine.models.ParticipationRuleResponse;
 import com.zenefits.benefits.poc.ZeneRulesEngine.services.IRulesService;
 
@@ -29,6 +31,11 @@ public class RulesController {
 	public ParticipationRuleResponse getMainPage(@RequestBody ParticipationRuleFact participationRuleFact){
 		System.out.println("API is up and running !!");
 		return ruleService.executeParticipationRule(participationRuleFact);
+	}
+	@RequestMapping(value = "/carrier-questions",method=RequestMethod.POST)
+	@ResponseBody
+	public String getMainPage(@RequestBody CarrierQuestionFact carrierQuestionFact){
+		return ruleService.executeCarrierQuestion(carrierQuestionFact);
 	}
 
 	@RequestMapping(value = "/health-check",method=RequestMethod.GET)

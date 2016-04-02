@@ -14,7 +14,7 @@ public class CarrierQuestionFact {
 	public CarrierQuestionFact(){
 		
 	}
-	
+
 
 	public String getCarrierName() {
 		return carrierName;
@@ -36,8 +36,33 @@ public class CarrierQuestionFact {
 	}
 
 
+	public String getEnrollmentFlow() {
+		return enrollmentFlow;
+	}
+
+
+	public void setEnrollmentFlow(String enrollmentFlow) {
+		this.enrollmentFlow = enrollmentFlow;
+	}
+
+
 	public String getLineOfCoverage() {
 		return lineOfCoverage;
+	}
+
+
+	public void setLineOfCoverage(String lineOfCoverage) {
+		this.lineOfCoverage = lineOfCoverage;
+	}
+
+
+	public String getEnrollmentType() {
+		return enrollmentType;
+	}
+
+
+	public void setEnrollmentType(String enrollmentType) {
+		this.enrollmentType = enrollmentType;
 	}
 
 
@@ -51,25 +76,15 @@ public class CarrierQuestionFact {
 	}
 
 
-	public String getEnrollmentFlow() {
-		return enrollmentFlow;
-	}
-	public void setEnrollmentFlow(String enrollmentFlow) {
-		this.enrollmentFlow = enrollmentFlow;
-	}
-	public String getEnrollmentType() {
-		return enrollmentType;
-	}
-	public void setEnrollmentType(String enrollmentType) {
-		this.enrollmentType = enrollmentType;
-	}
-
 	public String getQuestionsList() {
 		return questionsList;
 	}
 
+
 	public void setQuestionsList(String questionsList) {
 		this.questionsList = questionsList;
 	}
+	
+
 	
 }

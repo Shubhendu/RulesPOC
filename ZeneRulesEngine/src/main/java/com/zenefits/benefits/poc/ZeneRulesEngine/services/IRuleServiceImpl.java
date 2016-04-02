@@ -1,25 +1,20 @@
 package com.zenefits.benefits.poc.ZeneRulesEngine.services;
 
-import org.kie.internal.runtime.StatelessKnowledgeSession;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.kie.api.runtime.KieSession;
 import org.springframework.stereotype.Service;
 
-import com.zenefits.benefits.poc.ZeneRulesEngine.CarrierQuestionDecisionTable;
-import com.zenefits.benefits.poc.ZeneRulesEngine.ParticipationDecisionTable;
+import com.zenefits.benefits.poc.ZeneRulesEngine.RulesLoader;
 import com.zenefits.benefits.poc.ZeneRulesEngine.models.CarrierQuestionFact;
 import com.zenefits.benefits.poc.ZeneRulesEngine.models.ParticipationRuleFact;
 import com.zenefits.benefits.poc.ZeneRulesEngine.models.ParticipationRuleResponse;
 
 @Service
 public class IRuleServiceImpl implements IRulesService{
-
-	@Autowired
-	private ParticipationDecisionTable participationDecisionsTable;
-	private CarrierQuestionDecisionTable carrierQuestionDecisionTable;
 	
 	public ParticipationRuleResponse executeParticipationRule(ParticipationRuleFact participationRuleFact) {
-		StatelessKnowledgeSession kSession = participationDecisionsTable.KSESSION;
-		kSession.execute(participationRuleFact);
+		KieSession kSession = RulesLoader.PARTICIPATION_RULE_SESSION;
+		kSession.insert(participationRuleFact);
+		kSession.fireAllRules();
 		ParticipationRuleResponse participationRuleResponse = new ParticipationRuleResponse();
 		Integer minNumberOfEEs = participationRuleFact.getMinimumNumberOfEEs();
 		Double minPercentOfEEs = participationRuleFact.getMinimumPercentageOfEEs();
@@ -60,8 +55,9 @@ public class IRuleServiceImpl implements IRulesService{
 	}
 	
 	public String executeCarrierQuestion(CarrierQuestionFact carrierQuestionFact) {
-		StatelessKnowledgeSession kSession = participationDecisionsTable.KSESSION;
-		kSession.execute(carrierQuestionFact);
+		KieSession kSession = RulesLoader.CARRIER_QUESTIONS_RULE_SESSION;
+		kSession.insert(carrierQuestionFact);
+		kSession.fireAllRules();
 		String questionsList = carrierQuestionFact.getQuestionsList();
 		return questionsList;
 	}

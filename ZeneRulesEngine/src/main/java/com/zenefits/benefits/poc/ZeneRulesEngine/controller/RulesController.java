@@ -29,7 +29,6 @@ public class RulesController {
 	@RequestMapping(value = "/participation-rules",method=RequestMethod.POST)
 	@ResponseBody
 	public ParticipationRuleResponse getMainPage(@RequestBody ParticipationRuleFact participationRuleFact){
-		System.out.println("API is up and running !!");
 		return ruleService.executeParticipationRule(participationRuleFact);
 	}
 	@RequestMapping(value = "/carrier-questions",method=RequestMethod.POST)
@@ -41,7 +40,7 @@ public class RulesController {
 	@RequestMapping(value = "/health-check",method=RequestMethod.GET)
 	@ResponseBody
 	public String healthStatus(){
-		return "Hello world !!";
+		return "Welcome to the world of RULES ENGINE !!";
 	}
 	
 }

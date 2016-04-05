@@ -11,6 +11,7 @@ public class ParticipationRuleFact {
 	
 	private Integer minimumNumberOfEEs;
 	private Double minimumPercentageOfEEs;
+	private String operand;
 	
 	public Integer getMinimumNumberOfEEs() {
 		return minimumNumberOfEEs;
@@ -106,6 +107,12 @@ public class ParticipationRuleFact {
 
 	public void setNumberOfEnrolled(Integer numberOfEnrolled) {
 		this.numberOfEnrolled = numberOfEnrolled;
+	}
+	public String getOperand() {
+		return operand;
+	}
+	public void setOperand(String operand) {
+		this.operand = operand;
 	}
 	
 }

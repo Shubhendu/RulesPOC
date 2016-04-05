@@ -1,14 +1,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	
+
 	<parent>
 		<!-- Your own application should inherit from spring-boot-starter-parent -->
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>1.2.2.RELEASE</version>
 	</parent>
-	
+
 	<groupId>com.zenefits.benefits.poc</groupId>
 	<artifactId>ZeneRulesEngine</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
@@ -85,10 +85,10 @@
 			</exclusions>
 		</dependency>
 		<dependency>
-            <groupId>org.drools</groupId>
-            <artifactId>knowledge-api</artifactId>
-            <version>6.3.0.Final</version>
-        </dependency>
+			<groupId>org.drools</groupId>
+			<artifactId>knowledge-api</artifactId>
+			<version>6.3.0.Final</version>
+		</dependency>
 		<dependency>
 			<groupId>org.drools</groupId>
 			<artifactId>drools-compiler</artifactId>
@@ -110,6 +110,11 @@
 			<version>3.8.1</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>
@@ -127,7 +132,7 @@
 		</plugins>
 	</build>
 
-	
-		
-	
+
+
+
 </project>

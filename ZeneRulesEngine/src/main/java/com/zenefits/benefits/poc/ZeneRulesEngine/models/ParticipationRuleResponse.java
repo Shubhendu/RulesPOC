@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * @author ssingh
  *
  */
-public class ParticipationRuleResponse {
+public class ParticipationRuleResponse extends Response {
 	
 	private Boolean participationRuleSatisfied;
 	private ArrayList<String> failureReasons = new ArrayList<String>();
@@ -30,6 +30,7 @@ public class ParticipationRuleResponse {
 	public void addFailureReason(String failureReason){
 		this.failureReasons.add(failureReason);
 	}
+	
 	
 	
 	

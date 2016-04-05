@@ -3,6 +3,8 @@
  */
 package com.zenefits.benefits.poc.ZeneRulesEngine.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -10,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.zenefits.benefits.poc.ZeneRulesEngine.models.ParticipationRuleFact;
 import com.zenefits.benefits.poc.ZeneRulesEngine.models.CarrierQuestionFact;
-
+import com.zenefits.benefits.poc.ZeneRulesEngine.models.CarrierQuestionsRuleResponse;
+import com.zenefits.benefits.poc.ZeneRulesEngine.models.ParticipationRuleFact;
 import com.zenefits.benefits.poc.ZeneRulesEngine.models.ParticipationRuleResponse;
 import com.zenefits.benefits.poc.ZeneRulesEngine.services.IRulesService;
 
@@ -26,6 +28,8 @@ public class RulesController {
 	@Autowired
 	private IRulesService ruleService;
 	
+	private static final Logger LOGGER = LoggerFactory.getLogger(RulesController.class);
+	
 	@RequestMapping(value = "/participation-rules",method=RequestMethod.POST)
 	@ResponseBody
 	public ParticipationRuleResponse getMainPage(@RequestBody ParticipationRuleFact participationRuleFact){
@@ -33,7 +37,7 @@ public class RulesController {
 	}
 	@RequestMapping(value = "/carrier-questions",method=RequestMethod.POST)
 	@ResponseBody
-	public String getMainPage(@RequestBody CarrierQuestionFact carrierQuestionFact){
+	public CarrierQuestionsRuleResponse getMainPage(@RequestBody CarrierQuestionFact carrierQuestionFact){
 		return ruleService.executeCarrierQuestion(carrierQuestionFact);
 	}
 

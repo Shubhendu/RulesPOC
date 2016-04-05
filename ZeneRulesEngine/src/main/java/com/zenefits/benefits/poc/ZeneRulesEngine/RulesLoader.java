@@ -26,8 +26,6 @@ public class RulesLoader implements ApplicationListener<ContextRefreshedEvent> {
 			CARRIER_QUESTIONS_RULE_SESSION = kieContainer.newKieSession("carrier-questions-rules");
 			CARRIER_QUESTIONS_RULE_SESSION.addEventListener( new DebugAgendaEventListener() );
 			CARRIER_QUESTIONS_RULE_SESSION.addEventListener( new DebugRuleRuntimeEventListener() );
-			
-		
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

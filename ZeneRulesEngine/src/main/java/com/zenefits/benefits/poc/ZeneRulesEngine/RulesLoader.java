@@ -1,6 +1,7 @@
 package com.zenefits.benefits.poc.ZeneRulesEngine;
 
 import org.kie.api.KieServices;
+import org.kie.api.builder.KieScanner;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 import org.springframework.context.ApplicationListener;
@@ -20,6 +21,8 @@ public class RulesLoader implements ApplicationListener<ContextRefreshedEvent> {
 			PARTICIPATION_RULE_SESSION = kieContainer.newKieSession("participation-rules");
 			System.out.println("===== Loading Carrier Rules ==== ");
 			CARRIER_QUESTIONS_RULE_SESSION = kieContainer.newKieSession("carrier-questions-rules");
+			KieScanner kScanner = kieServices.newKieScanner( kieContainer );
+			kScanner.start( 10000L );
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
